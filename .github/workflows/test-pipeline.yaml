@@ -14,4 +14,4 @@ jobs:
     steps:
     - name: Check Input
       run: |
-        echo '${{ toJSON(github.event.inputs.consumerId) }}'
+        echo '${{ toJSON(github.event.inputs.service_project_configuration) }}'
