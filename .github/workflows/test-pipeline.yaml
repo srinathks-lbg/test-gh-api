@@ -8,7 +8,6 @@ name: Infrastructure Provisioning
         required: true
         type: string
 
-env:
 jobs:
   build:
     runs-on: ubuntu-latest
