@@ -6,7 +6,6 @@ name: Infrastructure Provisioning
     inputs:
       consumerId:
         required: true
-        type: string
 
 jobs:
   build:
