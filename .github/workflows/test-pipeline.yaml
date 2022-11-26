@@ -4,7 +4,7 @@ name: Infrastructure Provisioning
     branches:
     - main
     inputs:
-      consumerId:
+      service_project_configuration:
         required: true
         type: string
 
