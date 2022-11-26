@@ -1,0 +1,18 @@
+name: Infrastructure Provisioning
+'on':
+  workflow_dispatch:
+    branches:
+    - main
+    inputs:
+      consumerId:
+        required: true
+        type: string
+
+env:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check Input
+      run: |
+        echo ${{ github.event.inputs.consumerId }}
