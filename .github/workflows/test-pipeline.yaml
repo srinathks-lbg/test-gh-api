@@ -48,4 +48,4 @@ jobs:
                   --arg user_email "${{ github.event.pusher.email }}" \
                   '{repo_owner: $repo_owner, repo_name: $repo_name, main_branch: $main_branch, new_branch: $new_branch, commit_message: $commit_message, commit_description: $commit_description, file_path_to_commit: $file_path_to_commit, gh_token: $gh_token, user_name: $user_name, user_email: $user_email}' )") 
          
-         python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "${{ github.event.inputs.service_project_configuration }}" $(echo "$repository_details")
+         python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "${{ github.event.inputs.service_project_configuration }}" $repository_details
