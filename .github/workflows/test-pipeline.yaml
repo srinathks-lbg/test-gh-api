@@ -8,7 +8,7 @@ name: Infrastructure Provisioning
         required: true
         type: string
 env:
-  REPOSITORY_DETAILS = "VAL"
+  REPOSITORY_DETAILS: "VAL"
 jobs:
   setup:
     runs-on: ubuntu-latest
