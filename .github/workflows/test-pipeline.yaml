@@ -7,7 +7,18 @@ name: Infrastructure Provisioning
       service_project_configuration:
         required: true
         type: string
-
+env:
+  repository_details = {
+      "owner": "mayanklbg",
+      "user_email": "mayank.agarwal@e.lloydsbanking.com",
+      "repo_name": "test-gh-api",
+      "main_branch": "main",
+      "new_branch": "CPE-001",
+      "gh_token": "${{ github.event.inputs.gh_token }}",
+      "commit_message": "feat: CPE-001, Update docker file",
+      "description": "This change is intented to update docker file for it's base image",
+      "path_to_commit_data": data_file_to_commit,
+  }
 jobs:
   setup:
     runs-on: ubuntu-latest
