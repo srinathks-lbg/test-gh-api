@@ -8,13 +8,13 @@ name: Infrastructure Provisioning
         required: true
         type: string
 env:
-  REPO_OWNER_TO_COMMIT:"mayanklbg"
-  REPO_NAME_TO_COMMIT:"test-gh-api"
-  MAIN_BRANCH:"main"
-  NEW_BRANCH:"CPE-001"
-  COMMIT_MESSAGE:"feat CPE-001, Update docker file"
-  DESCRIPTION:"This change is intended to update docker file for it's base image"
-  PATH_TO_COMMIT:"data_file_to_commit"
+  REPO_OWNER_TO_COMMIT: "mayanklbg"
+  REPO_NAME_TO_COMMIT: "test-gh-api"
+  MAIN_BRANCH: "main"
+  NEW_BRANCH: "CPE-001"
+  COMMIT_MESSAGE: "feat CPE-001, Update docker file"
+  DESCRIPTION: "This change is intended to update docker file for it's base image"
+  PATH_TO_COMMIT: "data_file_to_commit"
 
 jobs:
   setup:
