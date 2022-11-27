@@ -35,7 +35,7 @@ jobs:
     - name: Generate pull request
       id: create_pr
       run: |
-         repository_details=$(echo echo "$( jq -n \
+         repository_details=$(echo "$( jq -n \
                   --arg repo_owner "$REPO_OWNER_TO_COMMIT" \
                   --arg repo_name "$REPO_NAME_TO_COMMIT" \
                   --arg main_branch "$MAIN_BRANCH" \
