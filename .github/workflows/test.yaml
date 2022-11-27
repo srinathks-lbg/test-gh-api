@@ -15,6 +15,6 @@ jobs:
     - name: Check conversion
       id: clone_workflow_repo
       run: |
-        jq -c '${{ github.event.inputs.service_project_configuration }} | fromjson' service_project_configuration.json
-        echo $(cat service_project_configuration.json)
+        service_project_configuration=$(echo "$(jq -c '.service_project_configuration | fromjson' ${{ github.event.inputs.service_project_configuration }})")
+        echo $service_project_configuration
         
