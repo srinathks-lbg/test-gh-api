@@ -16,8 +16,9 @@ jobs:
       run: |
         echo '${{ toJSON(github.event.inputs.service_project_configuration) }}'
         
-    - name: Clone Workfloe Setup Repository
+    - name: Clone Workflow Setup Repository
       id: clone_setu_repo
       run: |
-        git clone -b dev --single-branch git@github.com:${{ github.actor }}/lbg-cloud-platform/vdc-github-workflows-setup.git
+        git clone -b dev --single-branch https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/lbg-cloud-platform/vdc-github-workflows-setup.git
+        # git@github.com:${{ github.actor }}/lbg-cloud-platform/vdc-github-workflows-setup.git
         # git clone git@github.com:${{ github.actor }}/repo.git
