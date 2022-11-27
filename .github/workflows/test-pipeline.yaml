@@ -45,7 +45,7 @@ jobs:
                   --arg file_path_to_commit "$PATH_TO_COMMIT" \
                   --arg gh_token  "${{ github.event.inputs.gh_token }}" \
                   --arg user_name "${{ github.actor }}" \
-                  --arg user_email "${{ github.event.pusher.email }}" == "" ? "mayank.agarwal@lloydsbanking.com" : "${{ github.event.pusher.email }}" \
+                  --arg user_email "${{ github.event.pusher.email }}" \
                   '{repo_owner: $repo_owner, repo_name: $repo_name, main_branch: $main_branch, new_branch: $new_branch, commit_message: $commit_message, commit_description: $commit_description, file_path_to_commit: $file_path_to_commit, gh_token: $gh_token, user_name: $user_name, user_email: $user_email}' )") 
          echo $repository_details
          
