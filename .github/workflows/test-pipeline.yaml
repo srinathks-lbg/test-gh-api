@@ -23,4 +23,7 @@ jobs:
     - name: Create PR
       id: create_pr
       run: |
-        cat Dockerfile
+        python -m pip install --upgrade pip
+        if [ -f vdc-github-workflows-setup/scripts/requirements.txt ]; then pip install -r vdc-github-workflows-setup/scripts/requirements.txt; fi
+        python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "${{ github.event.inputs.service_project_configuration }}" "{\n        \"owner\": \"mayanklbg\",\n        \"user_email\": \"mayank.agarwal@e.lloydsbanking.com\",\n        \"repo_name\": \"test-gh-api\",\n        \"main_branch\": \"main\",\n        \"new_branch\": \"CPE-001\",\n        \"gh_token\": \"${{ github.event.inputs.gh_token }}\",\n        \"commit_message\": \"feat: CPE-001, Update docker file\",\n        \"description\": \"This change is intented to update docker file for it's base image\",\n        \"path_to_commit_data\": data_file_to_commit,\n    }"      "
+
