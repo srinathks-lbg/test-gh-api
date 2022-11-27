@@ -21,11 +21,8 @@ jobs:
       run: |
         git clone -b CPE-355 --single-branch https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/lbg-cloud-platform/vdc-github-workflows-setup.git
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [setup]
-    steps:
     - name: Create PR
+      id: create_pr
       run: |
         cd vdc-github-workflows-setup
         ls
