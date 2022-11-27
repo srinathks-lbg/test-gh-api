@@ -42,4 +42,4 @@ jobs:
                   --arg repo_name "$REPO_NAME_TO_COMMIT" \
                   --arg main_branch "$MAIN_BRANCH" \
                   '{repo_owner: $repo_owner, repo_name: $repo_name, main_branch: $main_branch}' )
-        # python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "${{ github.event.inputs.service_project_configuration }}" "$REPOSITORY_DETAILS"
+       
