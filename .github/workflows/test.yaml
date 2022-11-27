@@ -15,6 +15,6 @@ jobs:
     - name: Check conversion
       id: clone_workflow_repo
       run: |
-        service_project_configuration=$(echo "${{ toJSON(github.event.inputs.service_project_configuration) }}")
+        service_project_configuration=$(echo ${{ toJSON(github.event.inputs.service_project_configuration) }} | jq ".")
         echo $service_project_configuration
         
