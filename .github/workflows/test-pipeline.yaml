@@ -13,7 +13,7 @@ env:
   MAIN_BRANCH: "main"
   NEW_BRANCH: "CPE-001"
   COMMIT_MESSAGE: "feat CPE-001, Update docker file"
-  DESCRIPTION: "This change is intended to update docker file for it's base image"
+  COMMIT_DESCRIPTION: "This change is intended to update docker file for it's base image"
   PATH_TO_COMMIT: "data_file_to_commit"
 
 jobs:
@@ -37,9 +37,16 @@ jobs:
     - name: Generate pull request
       id: create_pr
       run: |
-        echo $( jq -n \
+        repository_detals = $( jq -n \
                   --arg repo_owner "$REPO_OWNER_TO_COMMIT" \
                   --arg repo_name "$REPO_NAME_TO_COMMIT" \
                   --arg main_branch "$MAIN_BRANCH" \
-                  '{repo_owner: $repo_owner, repo_name: $repo_name, main_branch: $main_branch}' )
-       
+                  --arg new_branch "$NEW_BRANCH" \
+                  --arg commit_message "$COMMIT_MESSAGE" \
+                  --arg commit_description "$COMMIT_DESCRIPTION" \
+                  --arg file_path_to_commit "$PATH_TO_COMMIT" \
+                  --arg gh_token  "${{ github.event.inputs.gh_token }}" \
+                  --arg user_name "${{ github.actor }}" \
+                  --arg user_email "${{ github.event.pusher.email }}" \
+                  '{repo_owner: $repo_owner, repo_name: $repo_name, main_branch: $main_branch, new_branch: $new_branch, commit_message: $commit_message, commit_description: $commit_description, file_path_to_commit: $file_path_to_commit, gh_token: $gh_token, user_name: $user_name, user_email: user_email}' )
+        echo $repository_detals
