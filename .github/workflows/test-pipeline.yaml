@@ -8,7 +8,7 @@ name: Infrastructure Provisioning
         required: true
         type: string
 env:
-  REPOSITORY_DETAILS = "{\n        \"owner\": \"${{ github.actor }}\",\n        \"user_email\": \"${{ github.event.pusher.email }}\",\n        \"repo_name\": \"test-gh-api\",\n        \"main_branch\": \"main\",\n        \"new_branch\": \"CPE-001\",\n        \"gh_token\": \"${{ github.event.inputs.gh_token }}\",\n        \"commit_message\": \"feat: CPE-001, Update docker file\",\n        \"description\": \"This change is intented to update docker file for it's base image\",\n        \"path_to_commit_data\": data_file_to_commit,\n    }" 
+  REPOSITORY_DETAILS = "VAL"
 jobs:
   setup:
     runs-on: ubuntu-latest
