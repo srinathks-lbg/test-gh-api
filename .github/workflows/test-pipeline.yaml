@@ -40,4 +40,5 @@ jobs:
     - name: Generate pull request
       id: create_pr
       run: |
-        python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "${{ github.event.inputs.service_project_configuration }}" "$REPOSITORY_DETAILS"
+        echo $REPOSITORY_DETAILS
+        # python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "${{ github.event.inputs.service_project_configuration }}" "$REPOSITORY_DETAILS"
