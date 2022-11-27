@@ -12,17 +12,15 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-    - name: Check Input
-      run: |
-        echo '${{ toJSON(github.event.inputs.service_project_configuration) }}'
+    - uses: actions/checkout@v3
+      id: checkout
         
     - name: Clone Workflow Setup Repository
-      id: clone_setup_repo
+      id: clone_workflow_repo
       run: |
         git clone -b CPE-355 --single-branch https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/lbg-cloud-platform/vdc-github-workflows-setup.git
 
     - name: Create PR
       id: create_pr
       run: |
-        cd vdc-github-workflows-setup
-        ls
+        cat Dockerfile
