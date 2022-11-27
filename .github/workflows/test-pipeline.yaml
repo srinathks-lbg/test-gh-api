@@ -51,4 +51,4 @@ jobs:
          echo "calling python script to generate a PR."
          echo "$repository_details"
          echo "calling python script to generate a PR......."
-         python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "${{ github.event.inputs.service_project_configuration }}" $(echo "$repository_details")
+         python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "${{ github.event.inputs.service_project_configuration }}" "$repository_details"
