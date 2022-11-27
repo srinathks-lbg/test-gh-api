@@ -1,0 +1,20 @@
+name: Infrastructure Provisioning
+'on':
+  workflow_dispatch:
+    branches:
+    - main
+    inputs:
+      service_project_configuration:
+        required: true
+        type: string
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:        
+    - name: Check conversion
+      id: clone_workflow_repo
+      run: |
+        jq -c '${{ github.event.inputs.service_project_configuration }} | fromjson' service_project_configuration.json
+        echo $(cat service_project_configuration.json)
+        
