@@ -35,8 +35,10 @@ jobs:
     - name: Generate pull request
       id: create_pr
       run: |
-        echo "Creating a JSON for repository details."
-         repository_details=$(echo "$( jq -n \
+        echo "Creating JSON to pass to python scripts"
+          project_configuration=$(echo "${{ toJSON(github.event.inputs.service_project_configuration) }}")
+          echo $service_project_configuration
+          repository_details=$(echo "$( jq -n \
                   --arg repo_owner "$REPO_OWNER_TO_COMMIT" \
                   --arg repo_name "$REPO_NAME_TO_COMMIT" \
                   --arg main_branch "$MAIN_BRANCH" \
@@ -49,4 +51,4 @@ jobs:
                   --arg user_email "${{ github.event.pusher.email }}" \
                   '{repo_owner: $repo_owner, repo_name: $repo_name, main_branch: $main_branch, new_branch: $new_branch, commit_message: $commit_message, commit_description: $commit_description, file_path_to_commit: $file_path_to_commit, gh_token: $gh_token, user_name: $user_name, user_email: $user_email}' )") 
          echo "calling python script to generate a PR."
-         python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "${{ github.event.inputs.service_project_configuration }}" "$repository_details"
+         python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "echo $project_configuration" "$repository_details"
