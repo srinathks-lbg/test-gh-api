@@ -2,52 +2,54 @@ name: Infrastructure Provisioning
 'on':
   workflow_dispatch:
     branches:
-    - main
+      - main
     inputs:
       service_project_configuration:
         required: true
         type: string
 env:
-  REPO_OWNER_TO_COMMIT: "mayanklbg"
-  REPO_NAME_TO_COMMIT: "test-gh-api"
-  MAIN_BRANCH: "main"
-  NEW_BRANCH: "CPE-001"
-  COMMIT_MESSAGE: "feat CPE-001, Update docker file"
-  COMMIT_DESCRIPTION: "This change is intended to update docker file for it's base image"
-  FILE_PATH_TO_COMMIT: "variables.tf"
-
+  REPO_OWNER_TO_COMMIT: mayanklbg
+  REPO_NAME_TO_COMMIT: test-gh-api
+  MAIN_BRANCH: main
+  NEW_BRANCH: CPE-001
+  COMMIT_MESSAGE: 'feat CPE-001, Update docker file'
+  COMMIT_DESCRIPTION: This change is intended to update docker file for it's base image
+  FILE_PATH_TO_COMMIT: variables.tf
 jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      id: checkout
-        
-    - name: Clone Workflow Setup Repository
-      id: clone_workflow_repo
-      run: |
-        git clone -b CPE-355 --single-branch https://${{ github.actor }}:${{ secrets.GH_TOKEN }}@github.com/lbg-cloud-platform/vdc-github-workflows-setup.git
-    - name: Install Python dependencies
-      id: pip_install
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f vdc-github-workflows-setup/scripts/requirements.txt ]; then pip install -r vdc-github-workflows-setup/scripts/requirements.txt; fi
-    - name: Generate pull request
-      id: create_pr
-      run: |
-        echo "Creating JSON to pass to python scripts"
-          project_configuration=$(echo ${{ toJSON(github.event.inputs.service_project_configuration) }} | jq ".")
-          repository_details=$(echo "$( jq -n \
-                  --arg repo_owner "$REPO_OWNER_TO_COMMIT" \
-                  --arg repo_name "$REPO_NAME_TO_COMMIT" \
-                  --arg main_branch "$MAIN_BRANCH" \
-                  --arg new_branch "$NEW_BRANCH" \
-                  --arg commit_message "$COMMIT_MESSAGE" \
-                  --arg commit_description "$COMMIT_DESCRIPTION" \
-                  --arg file_path_to_commit "$PATH_TO_COMMIT" \
-                  --arg gh_token  "${{ github.event.inputs.gh_token }}" \
-                  --arg user_name "${{ github.actor }}" \
-                  --arg user_email "${{ github.event.pusher.email }}" \
-                  '{repo_owner: $repo_owner, repo_name: $repo_name, main_branch: $main_branch, new_branch: $new_branch, commit_message: $commit_message, commit_description: $commit_description, file_path_to_commit: $file_path_to_commit, gh_token: $gh_token, user_name: $user_name, user_email: $user_email}' )") 
-         echo "calling python script to generate a PR."
-         python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "$project_configuration" "$repository_details"
+      - uses: actions/checkout@v3
+        id: checkout
+      - name: Clone Workflow Setup Repository
+        id: clone_workflow_repo
+        run: >
+          git clone -b CPE-355 --single-branch https://${{ github.actor }}:${{
+          secrets.GH_TOKEN
+          }}@github.com/lbg-cloud-platform/vdc-github-workflows-setup.git
+      - name: Install Python dependencies
+        id: pip_install
+        run: >
+          python -m pip install --upgrade pip
+
+          if [ -f vdc-github-workflows-setup/scripts/requirements.txt ]; then
+          pip install -r vdc-github-workflows-setup/scripts/requirements.txt; fi
+      - name: Generate pull request
+        id: create_pr
+        run: |
+          echo "Creating JSON to pass to python scripts"
+            project_configuration=$(echo ${{ toJSON(github.event.inputs.service_project_configuration) }} | jq ".")
+            repository_details=$(echo "$( jq -n \
+                    --arg repo_owner "$REPO_OWNER_TO_COMMIT" \
+                    --arg repo_name "$REPO_NAME_TO_COMMIT" \
+                    --arg main_branch "$MAIN_BRANCH" \
+                    --arg new_branch "$NEW_BRANCH" \
+                    --arg commit_message "$COMMIT_MESSAGE" \
+                    --arg commit_description "$COMMIT_DESCRIPTION" \
+                    --arg file_path_to_commit "$FILE_PATH_TO_COMMIT" \
+                    --arg gh_token  "${{ secrets.GH_TOKEN }}" \
+                    --arg user_name "${{ github.actor }}" \
+                    --arg user_email "${{ github.event.pusher.email }}" \
+                    '{repo_owner: $repo_owner, repo_name: $repo_name, main_branch: $main_branch, new_branch: $new_branch, commit_message: $commit_message, commit_description: $commit_description, file_path_to_commit: $file_path_to_commit, gh_token: $gh_token, user_name: $user_name, user_email: $user_email}' )") 
+           echo "calling python script to generate a PR."
+           python vdc-github-workflows-setup/scripts/pipeline_setup.py "infra" "$project_configuration" "$repository_details"
