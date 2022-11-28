@@ -14,7 +14,7 @@ env:
   NEW_BRANCH: "CPE-001"
   COMMIT_MESSAGE: "feat CPE-001, Update docker file"
   COMMIT_DESCRIPTION: "This change is intended to update docker file for it's base image"
-  PATH_TO_COMMIT: "data_file_to_commit"
+  PATH_TO_COMMIT: "variables.tf"
 
 jobs:
   setup:
